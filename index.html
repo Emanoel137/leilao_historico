@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leilão Histórico · Estrela de Jerigoatti</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --butter: #fdf6d8;
+            --butter-deep: #f5e9b8;
+            --butter-glow: #ffe9a8;
+            --indigo: #1f1a3a;
+            --indigo-deep: #120f24;
+            --indigo-mid: #2c2452;
+            --indigo-soft: #3d3366;
+            --indigo-light: #5a4b8a;
+            --gold: #d9b56a;
+            --gold-soft: #e6c98f;
+            --rainbow-pink: #ff9ec4;
+            --rainbow-blue: #8fd4ff;
+            --rainbow-green: #a6f0c6;
+            --rainbow-yellow: #ffe37a;
+            --rainbow-purple: #c9a6ff;
+            --rainbow-orange: #ffb38f;
+            --success: #7ee0a0;
+            --danger: #ff8a8a;
+        }
+
+        body {
+            background-color: var(--indigo-deep);
+            background-image: 
+                radial-gradient(ellipse at 15% 10%, rgba(61, 51, 102, 0.7) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 90%, rgba(90, 75, 138, 0.5) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 50%, rgba(31, 26, 58, 0.4) 0%, var(--indigo-deep) 80%);
+            font-family: 'Outfit', sans-serif;
+            color: var(--butter);
+            line-height: 1.65;
+            padding: 2.5rem 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: 
+                radial-gradient(1.5px 1.5px at 12% 18%, rgba(253, 246, 216, 0.5) 0%, transparent 100%),
+                radial-gradient(1px 1px at 78% 12%, rgba(253, 246, 216, 0.4) 0%, transparent 100%),
+                radial-gradient(2px 2px at 45% 88%, rgba(230, 201, 143, 0.35) 0%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 88% 65%, rgba(253, 246, 216, 0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 22% 72%, rgba(217, 181, 106, 0.35) 0%, transparent 100%),
+                radial-gradient(2px 2px at 65% 35%, rgba(201, 166, 255, 0.2) 0%, transparent 100%),
+                radial-gradient(1px 1px at 92% 88%, rgba(253, 246, 216, 0.3) 0%, transparent 100%);
+            background-size: 100% 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1220px;
+            width: 100%;
+            background: linear-gradient(160deg, rgba(44, 36, 82, 0.82) 0%, rgba(24, 20, 46, 0.92) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(217, 181, 106, 0.4);
+            border-radius: 36px;
+            padding: 3rem 2.5rem;
+            box-shadow: 
+                0 30px 70px -12px rgba(0, 0, 0, 0.9),
+                0 0 0 1px rgba(253, 246, 216, 0.05) inset,
+                0 0 80px rgba(90, 75, 138, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .container::before,
+        .container::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--gold);
+            opacity: 0.45;
+            pointer-events: none;
+        }
+        .container::before {
+            top: 22px;
+            left: 22px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 20px 0 0 0;
+        }
+        .container::after {
+            bottom: 22px;
+            right: 22px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 20px 0;
+        }
+
+        /* ===== CABEÇALHO ===== */
+        .header {
+            text-align: center;
+            border-bottom: 1px solid rgba(217, 181, 106, 0.3);
+            padding-bottom: 2.2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .pre-title {
+            font-size: 0.8rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--gold-soft);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .pre-title::before,
+        .pre-title::after {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold));
+        }
+        .pre-title::after {
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 4.2rem;
+            line-height: 1.1;
+            color: var(--butter);
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+            text-shadow: 0 0 40px rgba(255, 233, 168, 0.35);
+        }
+
+        h1 span {
+            font-style: italic;
+            font-weight: 500;
+            color: var(--butter-glow);
+            position: relative;
+        }
+
+        h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, transparent, rgba(217, 181, 106, 0.45), transparent);
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .subhead {
+            font-size: 1.15rem;
+            font-weight: 300;
+            color: #d8cff0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 0.8rem;
+        }
+
+        .subhead i {
+            font-style: normal;
+            background: linear-gradient(135deg, var(--gold), #b8954f);
+            color: var(--indigo-deep);
+            padding: 0.45rem 1.4rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(217, 181, 106, 0.3);
+        }
+
+        /* ===== LAYOUT PRINCIPAL ===== */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; gap: 2rem; }
+            h1 { font-size: 2.6rem; }
+            .container { padding: 2rem 1.4rem; }
+            .container::before, .container::after { width: 50px; height: 50px; }
+        }
+
+        /* ===== CARD DA PEÇA ===== */
+        .artifact-card {
+            background: linear-gradient(170deg, rgba(61, 51, 102, 0.55), rgba(31, 26, 58, 0.9));
+            border-radius: 28px;
+            padding: 1.2rem;
+            box-shadow: 
+                0 20px 45px rgba(0, 0, 0, 0.65),
+                inset 0 0 0 1px rgba(217, 181, 106, 0.3);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .image-frame {
+            background: radial-gradient(circle at 50% 40%, #2c2452 0%, #141126 90%);
+            border-radius: 22px;
+            padding: 1rem;
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
+            margin-bottom: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: conic-gradient(from 0deg, transparent 0%, rgba(255, 233, 168, 0.08) 25%, transparent 50%, rgba(201, 166, 255, 0.08) 75%, transparent 100%);
+            animation: spin 24s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .artifact-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1.5px solid rgba(217, 181, 106, 0.6);
+            box-shadow: 
+                0 0 50px rgba(217, 181, 106, 0.18),
+                inset 0 0 60px rgba(31, 26, 58, 0.9);
+            position: relative;
+            background: radial-gradient(circle at 50% 45%, #1f1a3a 0%, #0d0a1a 85%);
+        }
+
+        .artifact-image svg {
+            width: 94%;
+            height: 94%;
+            filter: drop-shadow(0 0 25px rgba(255, 227, 122, 0.3));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .caption {
+            text-align: center;
+            color: var(--gold-soft);
+            margin-top: 0.8rem;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+        }
+
+        /* ===== DETALHES ===== */
+        .details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            padding-top: 0.4rem;
+        }
+
+        .lot-badge {
+            background: rgba(217, 181, 106, 0.12);
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            font-size: 0.72rem;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: var(--butter-glow);
+            align-self: flex-start;
+            border: 1px solid rgba(217, 181, 106, 0.55);
+            font-weight: 500;
+        }
+
+        .artifact-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--butter);
+            line-height: 1.1;
+            margin-top: 0.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .artifact-name small {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: #b8aad8;
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 3px;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .description {
+            font-size: 0.98rem;
+            color: #d8cff0;
+            border-left: 3px solid var(--gold);
+            padding-left: 1.4rem;
+            margin: 0.6rem 0;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .description strong {
+            color: var(--butter-glow);
+            font-weight: 500;
+        }
+
+        .provenance {
+            background: rgba(31, 26, 58, 0.65);
+            border-radius: 20px;
+            padding: 1.3rem 1.4rem;
+            margin: 0.6rem 0;
+            border: 1px solid rgba(217, 181, 106, 0.25);
+            display: grid;
+            gap: 0.7rem;
+        }
+
+        .provenance p {
+            display: flex;
+            gap: 14px;
+            align-items: baseline;
+            font-size: 0.92rem;
+            margin: 0;
+        }
+
+        .provenance .label {
+            color: var(--gold);
+            font-weight: 500;
+            min-width: 100px;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .provenance .value {
+            color: var(--butter);
+            font-weight: 300;
+        }
+
+        .tech-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-top: 0.6rem;
+        }
+
+        .spec-item {
+            background: rgba(61, 51, 102, 0.35);
+            border-radius: 14px;
+            padding: 0.9rem 1rem;
+            border: 1px solid rgba(217, 181, 106, 0.18);
+        }
+
+        .spec-item .spec-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+
+        .spec-item .spec-value {
+            font-size: 0.95rem;
+            color: var(--butter);
+            font-weight: 400;
+        }
+
+        .auth-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(217, 181, 106, 0.1);
+            border: 1px solid rgba(217, 181, 106, 0.4);
+            border-radius: 50px;
+            padding: 0.5rem 1.2rem;
+            margin-top: 0.8rem;
+            font-size: 0.78rem;
+            color: var(--gold-soft);
+            letter-spacing: 1px;
+            align-self: flex-start;
+        }
+
+        .auth-badge svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* ===== SEÇÃO DE LANCES ===== */
+        .bidding-section {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .bidding-section { grid-template-columns: 1fr; }
+        }
+
+        .bid-panel {
+            background: linear-gradient(150deg, rgba(61, 51, 102, 0.7), rgba(24, 20, 46, 0.92));
+            border-radius: 28px;
+            padding: 2rem 2rem 1.8rem;
+            border: 1px solid rgba(217, 181, 106, 0.4);
+            box-shadow: 
+                0 18px 40px rgba(0, 0, 0, 0.6),
+                inset 0 0 30px rgba(90, 75, 138, 0.25);
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bid-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--rainbow-purple), var(--rainbow-blue), transparent);
+            opacity: 0.7;
+        }
+
+        .panel-title {
+            font-size: 0.72rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-soft);
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panel-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+            animation: pulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .current-bid-display {
+            text-align: center;
+            padding: 1.2rem 1rem;
+            background: rgba(18, 15, 36, 0.55);
+            border-radius: 20px;
+            border: 1px solid rgba(217, 181, 106, 0.25);
+        }
+
+        .current-bid-display .label {
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-soft);
+            margin-bottom: 0.4rem;
+        }
+
+        .current-bid-display .value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--butter-glow);
+            line-height: 1;
+            letter-spacing: 1px;
+            text-shadow: 0 0 30px rgba(255, 233, 168, 0.45);
+            transition: all 0.3s ease;
+        }
+
+        .current-bid-display .value.flash {
+            animation: flash 0.6s ease;
+        }
+
+        @keyframes flash {
+            0% { color: var(--success); transform: scale(1.12); }
+            100% { color: var(--butter-glow); transform: scale(1); }
+        }
+
+        .bid-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: rgba(61, 51, 102, 0.4);
+            border-radius: 16px;
+            padding: 1rem 1.1rem;
+            border: 1px solid rgba(217, 181, 106, 0.2);
+            text-align: center;
+        }
+
+        .stat-card .stat-icon { font-size: 1.3rem; margin-bottom: 0.3rem; }
+
+        .stat-card .stat-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--butter);
+            line-height: 1;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #b8aad8;
+            margin-top: 4px;
+        }
+
+        .bid-form { display: flex; flex-direction: column; gap: 0.9rem; }
+
+        .bid-form label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold-soft);
+            font-weight: 500;
+        }
+
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+
+        .input-prefix {
+            position: absolute;
+            left: 1.3rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--gold);
+            pointer-events: none;
+        }
+
+        #bidInput {
+            width: 100%;
+            background: rgba(18, 15, 36, 0.85);
+            border: 2px solid rgba(217, 181, 106, 0.4);
+            border-radius: 50px;
+            padding: 1rem 1.3rem 1rem 3.6rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--butter);
+            outline: none;
+            transition: all 0.25s ease;
+            letter-spacing: 1px;
+        }
+
+        #bidInput::placeholder {
+            color: rgba(216, 207, 240, 0.35);
+            font-weight: 400;
+        }
+
+        #bidInput:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(217, 181, 106, 0.15), 0 0 25px rgba(255, 233, 168, 0.2);
+            background: rgba(18, 15, 36, 0.95);
+        }
+
+        #bidInput.error {
+            border-color: var(--danger);
+            box-shadow: 0 0 0 4px rgba(255, 138, 138, 0.15);
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .quick-bids { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+        .quick-bid {
+            background: rgba(217, 181, 106, 0.1);
+            border: 1px solid rgba(217, 181, 106, 0.35);
+            color: var(--gold-soft);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: 0.5px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .quick-bid:hover {
+            background: rgba(217, 181, 106, 0.25);
+            color: var(--butter);
+            transform: translateY(-2px);
+            border-color: var(--gold);
+        }
+
+        .quick-bid:active { transform: translateY(0); }
+
+        .btn-bid {
+            background: linear-gradient(135deg, var(--butter-deep), var(--gold-soft));
+            border: none;
+            color: var(--indigo-deep);
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 1.1rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            box-shadow: 0 6px 0 #9e8149, 0 14px 25px rgba(0, 0, 0, 0.55);
+            font-family: 'Outfit', sans-serif;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .btn-bid::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-bid:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 9px 0 #9e8149, 0 20px 32px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(135deg, var(--butter), var(--butter-glow));
+        }
+
+        .btn-bid:hover:not(:disabled)::after { left: 100%; }
+
+        .btn-bid:active:not(:disabled) {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #9e8149, 0 8px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-bid:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            box-shadow: 0 4px 0 #6b5733;
+        }
+
+        .feedback {
+            font-size: 0.85rem;
+            padding: 0.7rem 1.1rem;
+            border-radius: 12px;
+            display: none;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            line-height: 1.4;
+        }
+
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.success {
+            background: rgba(126, 224, 160, 0.12);
+            border: 1px solid rgba(126, 224, 160, 0.4);
+            color: var(--success);
+        }
+
+        .feedback.error {
+            background: rgba(255, 138, 138, 0.12);
+            border: 1px solid rgba(255, 138, 138, 0.4);
+            color: var(--danger);
+        }
+
+        /* ===== HISTÓRICO ===== */
+        .history-panel {
+            background: linear-gradient(150deg, rgba(31, 26, 58, 0.8), rgba(18, 15, 36, 0.92));
+            border-radius: 28px;
+            padding: 1.8rem 1.6rem;
+            border: 1px solid rgba(217, 181, 106, 0.3);
+            box-shadow: 
+                0 18px 40px rgba(0, 0, 0, 0.55),
+                inset 0 0 30px rgba(90, 75, 138, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 520px;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(217, 181, 106, 0.2);
+        }
+
+        .history-title {
+            font-size: 0.72rem;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: var(--gold-soft);
+            font-weight: 500;
+        }
+
+        .history-count {
+            background: rgba(217, 181, 106, 0.15);
+            color: var(--butter-glow);
+            font-size: 0.7rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            border: 1px solid rgba(217, 181, 106, 0.3);
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        #historyList {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            overflow-y: auto;
+            padding-right: 0.4rem;
+            flex: 1;
+        }
+
+        #historyList::-webkit-scrollbar { width: 6px; }
+        #historyList::-webkit-scrollbar-track { background: rgba(18, 15, 36, 0.5); border-radius: 10px; }
+        #historyList::-webkit-scrollbar-thumb { background: rgba(217, 181, 106, 0.4); border-radius: 10px; }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(61, 51, 102, 0.3);
+            border-radius: 14px;
+            padding: 0.75rem 1rem;
+            border-left: 3px solid rgba(217, 181, 106, 0.35);
+            transition: all 0.3s ease;
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .history-item.top { border-left-color: var(--gold); background: rgba(217, 181, 106, 0.12); }
+        .history-item.me { border-left-color: var(--rainbow-green); background: rgba(126, 224, 160, 0.1); }
+
+        .history-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--indigo-deep);
+            flex-shrink: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .history-info { flex: 1; min-width: 0; }
+
+        .history-name {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--butter);
+            letter-spacing: 0.3px;
+        }
+
+        .history-time { font-size: 0.65rem; color: #8a7fb5; letter-spacing: 0.5px; }
+
+        .history-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--butter-glow);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #8a7fb5;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* ===== CONTAGEM REGRESSIVA ===== */
+        .countdown-section {
+            background: linear-gradient(150deg, rgba(61, 51, 102, 0.6), rgba(31, 26, 58, 0.85));
+            border-radius: 32px;
+            padding: 2rem 2.2rem;
+            margin: 1.8rem 0 2rem;
+            border: 1px solid rgba(217, 181, 106, 0.4);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.5),
+                inset 0 0 30px rgba(90, 75, 138, 0.3);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--rainbow-purple), var(--rainbow-blue), transparent);
+            opacity: 0.6;
+        }
+
+        .countdown-title {
+            font-size: 0.8rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold-soft);
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+        }
+
+        .timer { display: flex; justify-content: center; gap: 2.2rem; flex-wrap: wrap; }
+
+        .timer-block { display: flex; flex-direction: column; align-items: center; min-width: 90px; }
+
+        .timer-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.8rem;
+            font-weight: 700;
+            color: var(--butter);
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(255, 233, 168, 0.5);
+            background: rgba(18, 15, 36, 0.7);
+            padding: 0.3rem 1rem;
+            border-radius: 18px;
+            border: 1px solid rgba(217, 181, 106, 0.35);
+            min-width: 110px;
+            letter-spacing: 4px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .timer-label {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #b8aad8;
+            margin-top: 8px;
+            font-weight: 300;
+        }
+
+        /* ===== COMENTÁRIOS E AVALIAÇÕES ===== */
+        .reviews-section {
+            background: linear-gradient(150deg, rgba(61, 51, 102, 0.6), rgba(31, 26, 58, 0.85));
+            border-radius: 32px;
+            padding: 2.5rem 2.2rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(217, 181, 106, 0.4);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.5),
+                inset 0 0 30px rgba(90, 75, 138, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reviews-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--rainbow-purple), var(--rainbow-orange), transparent);
+            opacity: 0.6;
+        }
+
+        .reviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid rgba(217, 181, 106, 0.2);
+        }
+
+        .reviews-title-group h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--butter);
+            line-height: 1.1;
+        }
+
+        .reviews-title-group p {
+            font-size: 0.85rem;
+            color: var(--gold-soft);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 400;
+            margin-top: 4px;
+        }
+
+        .rating-summary {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(18, 15, 36, 0.5);
+            border-radius: 20px;
+            padding: 1rem 1.6rem;
+            border: 1px solid rgba(217, 181, 106, 0.3);
+        }
+
+        .rating-average {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--butter-glow);
+            line-height: 1;
+        }
+
+        .rating-stars-summary { display: flex; flex-direction: column; gap: 4px; }
+
+        .stars-row { display: flex; gap: 3px; font-size: 1.1rem; }
+
+        .star-filled { color: var(--gold); }
+        .star-empty { color: rgba(217, 181, 106, 0.3); }
+
+        .rating-count { font-size: 0.75rem; color: #b8aad8; font-weight: 400; letter-spacing: 1px; }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .reviews-grid { grid-template-columns: 1fr; }
+        }
+
+        .review-form-card {
+            background: rgba(31, 26, 58, 0.65);
+            border-radius: 24px;
+            padding: 1.8rem;
+            border: 1px solid rgba(217, 181, 106, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-self: start;
+            position: sticky;
+            top: 1rem;
+        }
+
+        .review-form-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--butter);
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+        .form-group label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-soft);
+            font-weight: 500;
+        }
+
+        #reviewName, #reviewText {
+            width: 100%;
+            background: rgba(18, 15, 36, 0.85);
+            border: 2px solid rgba(217, 181, 106, 0.35);
+            border-radius: 14px;
+            padding: 0.8rem 1rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            color: var(--butter);
+            outline: none;
+            transition: all 0.25s ease;
+            font-weight: 300;
+        }
+
+        #reviewText { resize: vertical; min-height: 100px; }
+
+        #reviewName:focus, #reviewText:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(217, 181, 106, 0.15);
+        }
+
+        .star-rating-input {
+            display: flex;
+            gap: 6px;
+            font-size: 2rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .star-rating-input .star-input {
+            color: rgba(217, 181, 106, 0.3);
+            transition: all 0.15s ease;
+        }
+
+        .star-rating-input .star-input.hover,
+        .star-rating-input .star-input.selected {
+            color: var(--gold);
+            transform: scale(1.1);
+        }
+
+        .btn-submit-review {
+            background: linear-gradient(135deg, var(--butter-deep), var(--gold-soft));
+            border: none;
+            color: var(--indigo-deep);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: 0 5px 0 #9e8149, 0 10px 20px rgba(0, 0, 0, 0.4);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .btn-submit-review:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 #9e8149, 0 15px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-submit-review:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #9e8149, 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .review-feedback {
+            font-size: 0.8rem;
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
+            display: none;
+            font-weight: 400;
+        }
+
+        .review-feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        .review-feedback.success { background: rgba(126, 224, 160, 0.12); border: 1px solid rgba(126, 224, 160, 0.4); color: var(--success); }
+        .review-feedback.error { background: rgba(255, 138, 138, 0.12); border: 1px solid rgba(255, 138, 138, 0.4); color: var(--danger); }
+
+        .reviews-list { display: flex; flex-direction: column; gap: 1rem; }
+
+        .review-card {
+            background: rgba(31, 26, 58, 0.65);
+            border-radius: 20px;
+            padding: 1.2rem 1.4rem;
+            border: 1px solid rgba(217, 181, 106, 0.25);
+            border-left: 4px solid var(--gold);
+            animation: slideIn 0.4s ease;
+            transition: all 0.2s ease;
+        }
+
+        .review-card:hover {
+            box-shadow: 0 6px 20px rgba(217, 181, 106, 0.15);
+            transform: translateX(4px);
+        }
+
+        .review-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .review-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--indigo-deep);
+            flex-shrink: 0;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+        }
+
+        .review-meta { flex: 1; min-width: 0; }
+
+        .review-author {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--butter);
+        }
+
+        .review-date {
+            font-size: 0.68rem;
+            color: #8a7fb5;
+            letter-spacing: 0.5px;
+        }
+
+        .review-stars { display: flex; gap: 2px; font-size: 1rem; }
+
+        .review-text {
+            font-size: 0.9rem;
+            color: #d8cff0;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .empty-reviews {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            color: #8a7fb5;
+            font-size: 0.9rem;
+            font-style: italic;
+            background: rgba(31, 26, 58, 0.4);
+            border-radius: 16px;
+            border: 1px dashed rgba(217, 181, 106, 0.3);
+        }
+
+        /* ===== RODAPÉ ===== */
+        .footer {
+            text-align: center;
+            font-size: 0.78rem;
+            color: #8a7fb5;
+            margin-top: 2.5rem;
+            border-top: 1px solid rgba(217, 181, 106, 0.2);
+            padding-top: 1.8rem;
+            letter-spacing: 1.5px;
+            font-weight: 300;
+        }
+
+        .footer a {
+            color: var(--gold-soft);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: var(--butter-glow);
+            text-decoration: underline;
+        }
+
+        .footer p:first-child {
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: #b8aad8;
+        }
+
+        .gold { color: var(--gold-soft); font-weight: 500; }
+
+        .rainbow-text {
+            background: linear-gradient(90deg, var(--rainbow-pink), var(--rainbow-yellow), var(--rainbow-green), var(--rainbow-blue), var(--rainbow-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .timer-number { font-size: 2.4rem; min-width: 70px; padding: 0.3rem 0.5rem; }
+            .timer { gap: 1rem; }
+            .tech-specs { grid-template-columns: 1fr; }
+            .artifact-name { font-size: 2rem; }
+            .current-bid-display .value { font-size: 2.3rem; }
+            .bid-panel, .history-panel { padding: 1.4rem; }
+            .quick-bids { justify-content: center; }
+            .reviews-section { padding: 1.6rem 1.2rem; }
+            .rating-summary { padding: 0.8rem 1.2rem; }
+            .rating-average { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="pre-title">Leilão excepcional · antiguidades</div>
+        <h1>Estrela de <span>Jerigoatti</span></h1>
+        <div class="subhead">
+            <span>A peça mais rara já descoberta no Oriente Próximo</span>
+            <i>18 · NOV</i>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <div class="main-grid">
+        <div class="artifact-card">
+            <div class="image-frame">
+                <div class="artifact-image">
+                    <!-- DIAMANTE EM FORMATO DE ESTRELA NORMAL (5 PONTAS) COM PARTES COLORIDAS -->
+                    <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#fff8dc" stop-opacity="0.9"/>
+                                <stop offset="50%" stop-color="#ffe9a8" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#d9b56a" stop-opacity="0"/>
+                            </radialGradient>
+                            <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#fff8dc"/>
+                                <stop offset="50%" stop-color="#ffe9a8"/>
+                                <stop offset="100%" stop-color="#d9b56a"/>
+                            </linearGradient>
+                            <linearGradient id="starGoldDeep" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ffe9a8"/>
+                                <stop offset="100%" stop-color="#b8923f"/>
+                            </linearGradient>
+                            <linearGradient id="starGoldMid" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#f5d76e"/>
+                                <stop offset="100%" stop-color="#a8822f"/>
+                            </linearGradient>
+                            <radialGradient id="colorPink" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#ffb3d1"/>
+                                <stop offset="100%" stop-color="#ff9ec4"/>
+                            </radialGradient>
+                            <radialGradient id="colorBlue" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#b3e0ff"/>
+                                <stop offset="100%" stop-color="#8fd4ff"/>
+                            </radialGradient>
+                            <radialGradient id="colorGreen" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#b3ffcc"/>
+                                <stop offset="100%" stop-color="#a6f0c6"/>
+                            </radialGradient>
+                            <radialGradient id="colorPurple" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#e0b3ff"/>
+                                <stop offset="100%" stop-color="#c9a6ff"/>
+                            </radialGradient>
+                            <radialGradient id="colorOrange" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#ffd1b3"/>
+                                <stop offset="100%" stop-color="#ffb38f"/>
+                            </radialGradient>
+                        </defs>
+
+                        <!-- Brilho de fundo -->
+                        <circle cx="150" cy="150" r="130" fill="url(#starGlow)"/>
+
+                        <!-- ESTRELA DE 5 PONTAS (formato normal) -->
+                        <!-- Ponta superior -->
+                        <path d="M150 30 L172 118 L150 130 L128 118 Z" fill="url(#starGold)" stroke="#a8822f" stroke-width="2"/>
+                        <!-- Ponta superior direita -->
+                        <path d="M262 115 L190 145 L172 130 L200 55 Z" fill="url(#starGoldDeep)" stroke="#a8822f" stroke-width="2"/>
+                        <!-- Ponta inferior direita -->
+                        <path d="M215 265 L165 175 L190 145 L245 175 Z" fill="url(#starGoldMid)" stroke="#a8822f" stroke-width="2"/>
+                        <!-- Ponta inferior esquerda -->
+                        <path d="M85 265 L135 175 L110 145 L55 175 Z" fill="url(#starGoldDeep)" stroke="#a8822f" stroke-width="2"/>
+                        <!-- Ponta superior esquerda -->
+                        <path d="M38 115 L110 145 L128 130 L100 55 Z" fill="url(#starGold)" stroke="#a8822f" stroke-width="2"/>
+
+                        <!-- CENTRO DA ESTRELA - PARTES COLORIDAS INTERNAS -->
+                        <!-- Base dourada central -->
+                        <circle cx="150" cy="150" r="38" fill="url(#starGoldDeep)" stroke="#a8822f" stroke-width="2"/>
+
+                        <!-- Fatias coloridas internas (5 fatias em estrela) -->
+                        <!-- Fatia rosa (superior) -->
+                        <path d="M150 150 L150 112 A38 38 0 0 1 172 122 Z" fill="url(#colorPink)" stroke="#a8822f" stroke-width="1.5" opacity="0.95"/>
+                        <!-- Fatia azul (direita superior) -->
+                        <path d="M150 150 L172 122 A38 38 0 0 1 180 150 Z" fill="url(#colorBlue)" stroke="#a8822f" stroke-width="1.5" opacity="0.95"/>
+                        <!-- Fatia verde (direita inferior) -->
+                        <path d="M150 150 L180 150 A38 38 0 0 1 165 178 Z" fill="url(#colorGreen)" stroke="#a8822f" stroke-width="1.5" opacity="0.95"/>
+                        <!-- Fatia roxa (inferior esquerda) -->
+                        <path d="M150 150 L165 178 A38 38 0 0 1 135 178 Z" fill="url(#colorPurple)" stroke="#a8822f" stroke-width="1.5" opacity="0.95"/>
+                        <!-- Fatia laranja (esquerda superior) -->
+                        <path d="M150 150 L135 178 A38 38 0 0 1 120 150 Z" fill="url(#colorOrange)" stroke="#a8822f" stroke-width="1.5" opacity="0.95"/>
+                        <!-- Fatia dourada (esquerda) -->
+                        <path d="M150 150 L120 150 A38 38 0 0 1 128 122 Z" fill="#f5d76e" stroke="#a8822f" stroke-width="1.5" opacity="0.95"/>
+
+                        <!-- Brilhos internos coloridos -->
+                        <circle cx="140" cy="130" r="4" fill="#fff9d6" opacity="0.9"/>
+                        <circle cx="168" cy="140" r="3" fill="#fff9d6" opacity="0.85"/>
+                        <circle cx="165" cy="170" r="4" fill="#fff9d6" opacity="0.9"/>
+                        <circle cx="128" cy="168" r="3" fill="#fff9d6" opacity="0.85"/>
+                        <circle cx="150" cy="150" r="6" fill="#fff9d6" opacity="0.95"/>
+
+                        <!-- Anel externo da estrela -->
+                        <circle cx="150" cy="150" r="38" fill="none" stroke="#ffe9a8" stroke-width="2" opacity="0.8"/>
+
+                        <!-- Linhas de facetas radiais -->
+                        <line x1="150" y1="112" x2="150" y2="188" stroke="#a8822f" stroke-width="1" opacity="0.5"/>
+                        <line x1="120" y1="150" x2="180" y2="150" stroke="#a8822f" stroke-width="1" opacity="0.5"/>
+                        <line x1="128" y1="122" x2="172" y2="178" stroke="#a8822f" stroke-width="1" opacity="0.5"/>
+                        <line x1="172" y1="122" x2="128" y2="178" stroke="#a8822f" stroke-width="1" opacity="0.5"/>
+                        <line x1="135" y1="178" x2="165" y2="178" stroke="#a8822f" stroke-width="1" opacity="0.4"/>
+
+                        <!-- Base ornamentada -->
+                        <ellipse cx="150" cy="272" rx="48" ry="12" fill="#2c2452" stroke="#d9b56a" stroke-width="2"/>
+                        <ellipse cx="150" cy="269" rx="38" ry="9" fill="#3d3366" stroke="#d9b56a" stroke-width="1.5" opacity="0.8"/>
+                        <circle cx="122" cy="269" r="2.5" fill="#ffe9a8"/>
+                        <circle cx="150" cy="274" r="2.5" fill="#ffe9a8"/>
+                        <circle cx="178" cy="269" r="2.5" fill="#ffe9a8"/>
+                    </svg>
+                </div>
+                <div class="caption">"Estrela de Jerigoatti" — diamante em estrela de 5 pontas com núcleo colorido</div>
+            </div>
+            <div class="lot-badge">Lote 07 · Coleção Real</div>
+            <div class="auth-badge">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L15 8H22L16 13L18 20L12 16L6 20L8 13L2 8H9L12 2Z" fill="#d9b56a"/>
+                </svg>
+                Autenticado · Certificado incluso
+            </div>
+        </div>
+
+        <div class="details">
+            <h2 class="artifact-name">
+                Estrela de Jerigoatti<br>
+                <small>Raríssimo · achado arqueológico</small>
+            </h2>
+            <p class="description">
+                Peça cerimonial em <strong>ouro amarelo 22k</strong> esculpida em formato de estrela de cinco pontas, com <strong class="rainbow-text">núcleo de gemas coloridas</strong> — safiras, rubis, esmeraldas e topázios — desenterrada nas escavações de <span class="gold">Jerigoatti</span> (região histórica da antiga Jericó). O diamante central é o único exemplar conhecido com essa combinação de cores. Autenticado por peritos do Museu de Antiguidades do Oriente e acompanhado de laudo gemológico internacional.
+            </p>
+            <div class="provenance">
+                <p><span class="label">Origem</span> <span class="value">Jerigoatti, Vale do Jordão</span></p>
+                <p><span class="label">Datação</span> <span class="value">c. 650 a.C.</span></p>
+                <p><span class="label">Material</span> <span class="value">Ouro 22k · Diamante estrela · Gemas coloridas</span></p>
+                <p><span class="label">Peso</span> <span class="value">42,8 g · Diamante central: 18,2 ct</span></p>
+                <p><span class="label">Certificado</span> <span class="value">Laudo gemológico + histórico de escavação</span></p>
+            </div>
+            <div class="tech-specs">
+                <div class="spec-item">
+                    <div class="spec-label">Pureza do ouro</div>
+                    <div class="spec-value">22 quilates (91,6%)</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Gemas internas</div>
+                    <div class="spec-value">6 variedades coloridas</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Diamante</div>
+                    <div class="spec-value">18,2 ct · formato estrela</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Procedência</div>
+                    <div class="spec-value">Escavação 2024 · Jerigoatti</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEÇÃO DE LANCES -->
+    <div class="bidding-section">
+        <div class="bid-panel">
+            <div class="panel-title">Leilão ao vivo · lance mínimo R$ 100.000</div>
+            <div class="current-bid-display">
+                <div class="label">Lance atual</div>
+                <div class="value" id="currentBidValue">R$ 4.750.000</div>
+            </div>
+            <div class="bid-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-value" id="participantCount">3</div>
+                    <div class="stat-label">Participantes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔨</div>
+                    <div class="stat-value" id="totalBidsCount">3</div>
+                    <div class="stat-label">Lances totais</div>
+                </div>
+            </div>
+
+            <div class="bid-form">
+                <label for="bidInput">Seu lance (R$)</label>
+                <div class="input-wrapper">
+                    <span class="input-prefix">R$</span>
+                    <input type="text" id="bidInput" placeholder="5.000.000" autocomplete="off" inputmode="numeric">
+                </div>
+                <div class="quick-bids">
+                    <button class="quick-bid" data-increment="100000">+ R$ 100 mil</button>
+                    <button class="quick-bid" data-increment="250000">+ R$ 250 mil</button>
+                    <button class="quick-bid" data-increment="500000">+ R$ 500 mil</button>
+                    <button class="quick-bid" data-increment="1000000">+ R$ 1 milhão</button>
+                </div>
+                <div class="feedback" id="feedback"></div>
+                <button class="btn-bid" id="bidButton">Dar lance</button>
+            </div>
+        </div>
+
+        <div class="history-panel">
+            <div class="history-header">
+                <div class="history-title">Últimos lances</div>
+                <div class="history-count" id="historyCount">3 lances</div>
+            </div>
+            <ul id="historyList"></ul>
+        </div>
+    </div>
+
+    <!-- CONTAGEM REGRESSIVA -->
+    <div class="countdown-section">
+        <div class="countdown-title">O leilão começa em</div>
+        <div class="timer" id="timer">
+            <div class="timer-block">
+                <div class="timer-number" id="days">00</div>
+                <div class="timer-label">dias</div>
+            </div>
+            <div class="timer-block">
+                <div class="timer-number" id="hours">00</div>
+                <div class="timer-label">horas</div>
+            </div>
+            <div class="timer-block">
+                <div class="timer-number" id="minutes">00</div>
+                <div class="timer-label">minutos</div>
+            </div>
+            <div class="timer-block">
+                <div class="timer-number" id="seconds">00</div>
+                <div class="timer-label">segundos</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== COMENTÁRIOS E AVALIAÇÕES ===== -->
+    <div class="reviews-section">
+        <div class="reviews-header">
+            <div class="reviews-title-group">
+                <h2>Comentários & Avaliações</h2>
+                <p>O que os especialistas estão dizendo</p>
+            </div>
+            <div class="rating-summary">
+                <div class="rating-average" id="ratingAverage">5.0</div>
+                <div class="rating-stars-summary">
+                    <div class="stars-row" id="starsSummary">
+                        <span class="star-filled">★</span>
+                        <span class="star-filled">★</span>
+                        <span class="star-filled">★</span>
+                        <span class="star-filled">★</span>
+                        <span class="star-filled">★</span>
+                    </div>
+                    <div class="rating-count" id="ratingCount">Baseado em 2 avaliações</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews-grid">
+            <!-- Formulário de avaliação -->
+            <div class="review-form-card">
+                <h3>Deixe sua avaliação</h3>
+                <div class="form-group">
+                    <label for="reviewName">Seu nome</label>
+                    <input type="text" id="reviewName" placeholder="Como deseja ser identificado?" maxlength="40">
+                </div>
+                <div class="form-group">
+                    <label>Sua nota</label>
+                    <div class="star-rating-input" id="starRatingInput">
+                        <span class="star-input" data-value="1">★</span>
+                        <span class="star-input" data-value="2">★</span>
+                        <span class="star-input" data-value="3">★</span>
+                        <span class="star-input" data-value="4">★</span>
+                        <span class="star-input" data-value="5">★</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reviewText">Seu comentário</label>
+                    <textarea id="reviewText" placeholder="O que você achou desta peça incrível?" maxlength="500"></textarea>
+                </div>
+                <div class="review-feedback" id="reviewFeedback"></div>
+                <button class="btn-submit-review" id="submitReviewBtn">Publicar avaliação</button>
+            </div>
+
+            <!-- Lista de avaliações -->
+            <div class="reviews-list" id="reviewsList"></div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <p>Leilão exclusivo · 18 de novembro · Jerigoatti Heritage Auctions</p>
+        <p style="margin-top: 0.6rem; font-size: 0.7rem;">© 2025 · Todos os direitos reservados · <a href="#">Política de privacidade</a> · <a href="#">Termos do leilão</a></p>
+    </footer>
+</div>
+
+<script>
+(function() {
+    /* ========== CONTAGEM REGRESSIVA ========== */
+    const now = new Date();
+    let leilaoAno = now.getFullYear();
+    const novembro = 10;
+    const diaLeilao = 18;
+    let dataLeilao = new Date(leilaoAno, novembro, diaLeilao, 15, 0, 0);
+    if (now > dataLeilao) {
+        leilaoAno += 1;
+        dataLeilao = new Date(leilaoAno, novembro, diaLeilao, 15, 0, 0);
+    }
+    const diasEl = document.getElementById('days');
+    const horasEl = document.getElementById('hours');
+    const minutosEl = document.getElementById('minutes');
+    const segundosEl = document.getElementById('seconds');
+    function updateTimer() {
+        const agora = new Date();
+        const diff = dataLeilao - agora;
+        if (diff <= 0) {
+            diasEl.textContent = '00'; horasEl.textContent = '00';
+            minutosEl.textContent = '00'; segundosEl.textContent = '00';
+            document.querySelector('.countdown-title').textContent = 'Leilão em andamento!';
+            return;
+        }
+        const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((diff % (1000 * 60)) / 1000);
+        diasEl.textContent = String(dias).padStart(2, '0');
+        horasEl.textContent = String(horas).padStart(2, '0');
+        minutosEl.textContent = String(minutos).padStart(2, '0');
+        segundosEl.textContent = String(segundos).padStart(2, '0');
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
+
+    /* ========== SISTEMA DE LANCES ========== */
+    const MIN_BID = 100000;
+    const MIN_INCREMENT = 50000;
+    let currentBid = 4750000;
+    let participants = 3;
+    let totalBids = 3;
+    let hasUserBid = false;
+    let history = [
+        { name: 'Colecionador Anônimo', value: 4750000, time: 'há 12 min', isUser: false, color: '#8fd4ff' },
+        { name: 'Casa Real de Jerigoatti', value: 4300000, time: 'há 25 min', isUser: false, color: '#ff9ec4' },
+        { name: 'Museu do Oriente', value: 3900000, time: 'há 1 h', isUser: false, color: '#c9a6ff' }
+    ];
+
+    const currentBidValueEl = document.getElementById('currentBidValue');
+    const participantCountEl = document.getElementById('participantCount');
+    const totalBidsCountEl = document.getElementById('totalBidsCount');
+    const bidInput = document.getElementById('bidInput');
+    const bidButton = document.getElementById('bidButton');
+    const feedbackEl = document.getElementById('feedback');
+    const historyListEl = document.getElementById('historyList');
+    const historyCountEl = document.getElementById('historyCount');
+
+    function formatBRL(value) { return 'R$ ' + value.toLocaleString('pt-BR'); }
+    function formatInputValue(raw) {
+        const digits = raw.replace(/\D/g, '');
+        if (!digits) return '';
+        return parseInt(digits, 10).toLocaleString('pt-BR');
+    }
+    function parseInputValue(str) {
+        const digits = str.replace(/\D/g, '');
+        return digits ? parseInt(digits, 10) : 0;
+    }
+    function updateUI() {
+        currentBidValueEl.textContent = formatBRL(currentBid);
+        participantCountEl.textContent = participants;
+        totalBidsCountEl.textContent = totalBids;
+        historyCountEl.textContent = totalBids + (totalBids === 1 ? ' lance' : ' lances');
+        renderHistory();
+    }
+    function renderHistory() {
+        historyListEl.innerHTML = '';
+        if (history.length === 0) {
+            historyListEl.innerHTML = '<li class="empty-history">Nenhum lance ainda. Seja o primeiro!</li>';
+            return;
+        }
+        const sorted = [...history].sort((a, b) => b.value - a.value);
+        sorted.forEach((bid, index) => {
+            const li = document.createElement('li');
+            li.className = 'history-item';
+            if (index === 0) li.classList.add('top');
+            if (bid.isUser) li.classList.add('me');
+            li.innerHTML = `
+                <div class="history-avatar" style="background:${bid.color || '#d9b56a'};">${bid.name.charAt(0).toUpperCase()}</div>
+                <div class="history-info">
+                    <div class="history-name">${bid.name}${bid.isUser ? ' <span style="color:#7ee0a0;font-size:0.7rem;">(você)</span>' : ''}</div>
+                    <div class="history-time">${bid.time}</div>
+                </div>
+                <div class="history-value">${formatBRL(bid.value)}</div>
+            `;
+            historyListEl.appendChild(li);
+        });
+    }
+    function showFeedback(message, type) {
+        feedbackEl.textContent = message;
+        feedbackEl.className = 'feedback show ' + type;
+        clearTimeout(showFeedback._timeout);
+        showFeedback._timeout = setTimeout(() => feedbackEl.classList.remove('show'), 5000);
+    }
+    function flashCurrentBid() {
+        currentBidValueEl.classList.remove('flash');
+        void currentBidValueEl.offsetWidth;
+        currentBidValueEl.classList.add('flash');
+    }
+
+    bidInput.addEventListener('input', (e) => {
+        e.target.value = formatInputValue(e.target.value);
+        e.target.classList.remove('error');
+    });
+    bidInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); bidButton.click(); }
+    });
+    document.querySelectorAll('.quick-bid').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const increment = parseInt(btn.dataset.increment, 10);
+            bidInput.value = (currentBid + increment).toLocaleString('pt-BR');
+            bidInput.classList.remove('error');
+            bidInput.focus();
+        });
+    });
+    bidButton.addEventListener('click', () => {
+        if (hasUserBid) {
+            showFeedback('⚠️ Você já deu um lance! Aguarde o resultado do leilão.', 'error');
+            return;
+        }
+        const bidValue = parseInputValue(bidInput.value);
+        if (!bidValue || bidValue <= 0) {
+            bidInput.classList.add('error');
+            showFeedback('❌ Digite um valor de lance válido.', 'error');
+            bidInput.focus();
+            return;
+        }
+        const minAllowed = Math.max(MIN_BID, currentBid + MIN_INCREMENT);
+        if (bidValue < MIN_BID) {
+            bidInput.classList.add('error');
+            showFeedback(`❌ O lance mínimo é ${formatBRL(MIN_BID)}.`, 'error');
+            bidInput.focus();
+            return;
+        }
+        if (bidValue <= currentBid) {
+            bidInput.classList.add('error');
+            showFeedback(`❌ Seu lance precisa ser maior que o lance atual (${formatBRL(currentBid)}).`, 'error');
+            bidInput.focus();
+            return;
+        }
+        if (bidValue < minAllowed) {
+            bidInput.classList.add('error');
+            showFeedback(`❌ O próximo lance mínimo é ${formatBRL(minAllowed)} (incremento de ${formatBRL(MIN_INCREMENT)}).`, 'error');
+            bidInput.focus();
+            return;
+        }
+        currentBid = bidValue;
+        totalBids += 1;
+        participants += 1;
+        hasUserBid = true;
+        history.unshift({ name: 'Você', value: bidValue, time: 'agora mesmo', isUser: true, color: '#a6f0c6' });
+        updateUI();
+        flashCurrentBid();
+        showFeedback(`✅ Lance de ${formatBRL(bidValue)} registrado com sucesso! Você assumiu a liderança do leilão.`, 'success');
+        bidInput.value = '';
+        bidInput.disabled = true;
+        bidButton.disabled = true;
+        bidButton.textContent = 'Lance registrado ✓';
+        document.querySelector('.history-panel').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    updateUI();
+
+    /* ========== SISTEMA DE COMENTÁRIOS E AVALIAÇÕES ========== */
+    const reviewsListEl = document.getElementById('reviewsList');
+    const reviewName = document.getElementById('reviewName');
+    const reviewText = document.getElementById('reviewText');
+    const submitReviewBtn = document.getElementById('submitReviewBtn');
+    const reviewFeedback = document.getElementById('reviewFeedback');
+    const starRatingInput = document.getElementById('starRatingInput');
+    const starsSummary = document.getElementById('starsSummary');
+    const ratingAverageEl = document.getElementById('ratingAverage');
+    const ratingCountEl = document.getElementById('ratingCount');
+
+    let selectedRating = 0;
+
+    let reviews = [
+        {
+            name: 'Dr. Ahmed Al-Rashid',
+            rating: 5,
+            text: 'Peça absolutamente deslumbrante. A combinação do formato estrela com o núcleo multicolorido é única na arqueologia do Oriente Próximo. Recomendo fortemente o investimento.',
+            date: 'há 2 dias'
+        },
+        {
+            name: 'Maria Fernanda Costa',
+            rating: 5,
+            text: 'O diamante em estrela com as gemas coloridas internas é uma obra-prima. A foto não faz jus ao esplendor da peça ao vivo. Certamente um dos lotes mais impressionantes deste leilão.',
+            date: 'há 5 dias'
+        }
+    ];
+
+    const starElements = starRatingInput.querySelectorAll('.star-input');
+    starElements.forEach(star => {
+        star.addEventListener('mouseenter', () => {
+            const val = parseInt(star.dataset.value, 10);
+            starElements.forEach((s, i) => {
+                s.classList.toggle('hover', i < val);
+            });
+        });
+        star.addEventListener('mouseleave', () => {
+            starElements.forEach(s => s.classList.remove('hover'));
+        });
+        star.addEventListener('click', () => {
+            selectedRating = parseInt(star.dataset.value, 10);
+            starElements.forEach((s, i) => {
+                s.classList.toggle('selected', i < selectedRating);
+            });
+        });
+    });
+
+    function renderStars(rating) {
+        let html = '';
+        for (let i = 1; i <= 5; i++) {
+            html += `<span class="${i <= rating ? 'star-filled' : 'star-empty'}">★</span>`;
+        }
+        return html;
+    }
+
+    function updateRatingSummary() {
+        const total = reviews.length;
+        const sum = reviews.reduce((acc, r) => acc + r.rating, 0);
+        const avg = total > 0 ? (sum / total) : 0;
+        ratingAverageEl.textContent = avg.toFixed(1);
+        starsSummary.innerHTML = renderStars(Math.round(avg));
+        ratingCountEl.textContent = `Baseado em ${total} ${total === 1 ? 'avaliação' : 'avaliações'}`;
+    }
+
+    function renderReviews() {
+        reviewsListEl.innerHTML = '';
+        if (reviews.length === 0) {
+            reviewsListEl.innerHTML = '<div class="empty-reviews">Nenhuma avaliação ainda. Seja o primeiro a comentar!</div>';
+            return;
+        }
+        const sorted = [...reviews].sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+        sorted.forEach(review => {
+            const card = document.createElement('div');
+            card.className = 'review-card';
+            card.innerHTML = `
+                <div class="review-card-header">
+                    <div class="review-avatar">${review.name.charAt(0).toUpperCase()}</div>
+                    <div class="review-meta">
+                        <div class="review-author">${escapeHtml(review.name)}</div>
+                        <div class="review-date">${review.date || 'agora mesmo'}</div>
+                    </div>
+                    <div class="review-stars">${renderStars(review.rating)}</div>
+                </div>
+                <div class="review-text">${escapeHtml(review.text)}</div>
+            `;
+            reviewsListEl.appendChild(card);
+        });
+    }
+
+    function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
+    function showReviewFeedback(message, type) {
+        reviewFeedback.textContent = message;
+        reviewFeedback.className = 'review-feedback show ' + type;
+        clearTimeout(showReviewFeedback._timeout);
+        showReviewFeedback._timeout = setTimeout(() => reviewFeedback.classList.remove('show'), 4000);
+    }
+
+    submitReviewBtn.addEventListener('click', () => {
+        const name = reviewName.value.trim();
+        const text = reviewText.value.trim();
+
+        if (!name) {
+            showReviewFeedback('❌ Por favor, digite seu nome.', 'error');
+            reviewName.focus();
+            return;
+        }
+        if (selectedRating === 0) {
+            showReviewFeedback('❌ Por favor, selecione uma nota de 1 a 5 estrelas.', 'error');
+            return;
+        }
+        if (!text) {
+            showReviewFeedback('❌ Por favor, escreva seu comentário.', 'error');
+            reviewText.focus();
+            return;
+        }
+        if (text.length < 10) {
+            showReviewFeedback('❌ Seu comentário deve ter pelo menos 10 caracteres.', 'error');
+            reviewText.focus();
+            return;
+        }
+
+        reviews.unshift({
+            name: name,
+            rating: selectedRating,
+            text: text,
+            date: 'agora mesmo',
+            timestamp: Date.now()
+        });
+
+        updateRatingSummary();
+        renderReviews();
+        showReviewFeedback('✅ Avaliação publicada com sucesso! Obrigado pelo seu comentário.', 'success');
+
+        reviewName.value = '';
+        reviewText.value = '';
+        selectedRating = 0;
+        starElements.forEach(s => s.classList.remove('selected', 'hover'));
+    });
+
+    updateRatingSummary();
+    renderReviews();
+})();
+</script>
+
+</body>
+</html>
